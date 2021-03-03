@@ -1,14 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Blogs } from 'app/interfaz/blogs.interface';
 import { WebService } from 'app/web.service';
 
 @Component({
-    selector: 'app-navigation',
-    templateUrl: './navigation.component.html',
-    styleUrls: ['./navigation.component.scss']
+  selector: 'app-blogs',
+  templateUrl: './blogs.component.html',
+  styleUrls: ['./blogs.component.css'] ,
+  providers: [NgbModalConfig, NgbModal],
+  encapsulation: ViewEncapsulation.None,
+  styles: [`
+    .dark-modal .modal-content {
+      background-color: #292b2c;
+      color: white;
+    }
+    .dark-modal .close {
+      color: white;
+    }
+    .light-blue-backdrop {
+      background-color: #5cb3fd;
+    }
+  `]
 })
-export class NavigationComponent implements OnInit {
+export class BlogsComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
@@ -21,7 +36,10 @@ export class NavigationComponent implements OnInit {
   blogs: Blogs = undefined
   myForm: FormGroup;
 
-  constructor(private webService: WebService, private formBuilder: FormBuilder) { }
+  constructor(private webService: WebService, private formBuilder: FormBuilder,config: NgbModalConfig, private modalService: NgbModal) {
+    config.backdrop = 'static';
+    config.keyboard = false;
+   }
 
 
   private createForm() {
@@ -44,6 +62,10 @@ export class NavigationComponent implements OnInit {
       let response = JSON.parse(JSON.stringify(res))
       this.usersList = response.data
     })
+  }
+
+  open(content) {
+    this.modalService.open(content);
   }
 
   addBlogs(blogs: Blogs): void {
@@ -69,6 +91,10 @@ export class NavigationComponent implements OnInit {
     this.myForm.controls['user_id'].setValue(this.blogs.user_id)
     this.myForm.controls['category_id'].setValue(this.blogs.category_id)
    
+  }
+
+  openLg(content) {
+    this.modalService.open(content, { size: 'lg' });
   }
 
   delete(blogs: Blogs): void {
