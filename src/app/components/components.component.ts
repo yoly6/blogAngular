@@ -1,6 +1,9 @@
 import { Component, OnInit, Renderer2, OnDestroy } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { NgbAccordionConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Blogs } from 'app/interfaz/blogs.interface';
+import { WebService } from 'app/web.service';
 import * as Rellax from 'rellax';
 
 @Component({
@@ -13,50 +16,45 @@ import * as Rellax from 'rellax';
     `]
 })
 
-export class ComponentsComponent implements OnInit, OnDestroy {
-    data : Date = new Date();
+export class ComponentsComponent implements OnInit{
+   
+  ngOnInit(): void {
+    this.getData();
+    
+  }
+  url: string = 'blogs';
+  title = 'Laravel';
+  usersList: Array<Blogs>
+  blogs: Blogs = undefined
+  myForm: FormGroup;
 
-    page = 4;
-    page1 = 5;
-    page2 = 3;
-    focus;
-    focus1;
-    focus2;
+  constructor(private webService: WebService) { }
 
-    date: {year: number, month: number};
-    model: NgbDateStruct;
+  getData(): void {
+    this.webService.get(this.url).subscribe(res => {
+      let response = JSON.parse(JSON.stringify(res))
+      this.usersList = response.data
+    })
+  }
 
-    public isCollapsed = true;
-    public isCollapsed1 = true;
-    public isCollapsed2 = true;
+  edit(blogs: Blogs): void {
+    this.blogs = blogs
+    this.myForm.controls['tittle'].setValue(this.blogs.tittle)
+    this.myForm.controls['summary'].setValue(this.blogs.summary)
+    this.myForm.controls['content'].setValue(this.blogs.content)
+    this.myForm.controls['url'].setValue(this.blogs.url)
+    this.myForm.controls['user_id'].setValue(this.blogs.user_id)
+    this.myForm.controls['category_id'].setValue(this.blogs.category_id)
+   
+  }
 
-    state_icon_primary = true;
-
-    constructor( private renderer : Renderer2, config: NgbAccordionConfig) {
-        config.closeOthers = true;
-        config.type = 'info';
-    }
-    isWeekend(date: NgbDateStruct) {
-        const d = new Date(date.year, date.month - 1, date.day);
-        return d.getDay() === 0 || d.getDay() === 6;
-    }
-
-    isDisabled(date: NgbDateStruct, current: {month: number}) {
-        return date.month !== current.month;
-    }
-
-    ngOnInit() {
-      var rellaxHeader = new Rellax('.rellax-header');
-
-        var navbar = document.getElementsByTagName('nav')[0];
-        navbar.classList.add('navbar-transparent');
-        var body = document.getElementsByTagName('body')[0];
-        body.classList.add('index-page');
-    }
-    ngOnDestroy(){
-        var navbar = document.getElementsByTagName('nav')[0];
-        navbar.classList.remove('navbar-transparent');
-        var body = document.getElementsByTagName('body')[0];
-        body.classList.remove('index-page');
-    }
+  delete(blogs: Blogs): void {
+    if(confirm('Esta seguro que quiere eliminarlo?')){
+    this.webService.delete(this.url, blogs).subscribe(res => {
+      let data = JSON.parse(JSON.stringify(res))
+      this.getData()
+    }, error => {
+    })
+  }
+}
 }

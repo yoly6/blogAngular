@@ -24,7 +24,7 @@ const routes: Routes =[
         BrowserModule,
         RouterModule.forRoot(routes)
     ],
-    exports: [
+    exports: [RouterModule
     ],
 })
 export class AppRoutingModule { }

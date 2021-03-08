@@ -1,0 +1,203 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="page-wrapper bg-dark p-t-100 p-b-50">
+            <div class="wrapper wrapper--w900">
+                <div class="card card-6">
+                    <div class="card-heading">
+                        <h2 class="title">Agregar nuevo blog</h2>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="myForm" (ngSubmit)="submitForm(myForm)">
+                            <div class="form-row">
+                                <div class="name">Titulo</div>
+                                <div class="value">
+                                    <input type="text" class="form-control input--style-6" id="inlineFormInput"
+                                        placeholder="tittle" formControlName="tittle">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="name">Reseña</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <textarea class="textarea--style-6 form-control" formControlName="summary"
+                                            id="inlineFormInput" placeholder="Escriba el contenido"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="name">Contenido</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <textarea class="textarea--style-6 form-control" name="message"
+                                            formControlName="content" id="inlineFormInput"
+                                            placeholder="Escriba el contenido"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="name">Imagen</div>
+                                <div class="value">
+                                    <input type="text" class="form-control input--style-6" id="inlineFormInput"
+                                        placeholder="usuario" formControlName="url">
+                                    <div class="input-group js-input-file">
+                                        <input class="input-file" type="file" id="file" class="form-control"
+                                            id="inlineFormInput">
+                                        <label class="label--file" for="file">img</label>
+                                        <span class="input-file__info">imagen seleccionada</span>
+                                    </div>
+                                    <div class="label--desc">seleccione una imagen </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="name">usuario</div>
+                                <div class="value">
+                                    <input type="text" class="form-control input--style-6" id="inlineFormInput"
+                                        placeholder="usuario" formControlName="user_id">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="name">Categoria</div>
+                                <div class="value">
+                                    <div class="input-field col s12">
+                                         <select formControlName="category_id">
+                                        <option value="" *ngFor="let categories of categoriaList; let i=index"
+                                         class="form-control input--style-6">
+                                            {{categories.name}}
+                                        </option>
+                                        </select>
+                                        <label>Seleccione la categoria</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn--radius-2 btn--blue-2" type="submit"
+                                    [disabled]="!myForm.valid">Guardar</button>
+                                <button type="button" class="btn btn-light"
+                                    (click)="modal.close('Close click')">Cerrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #Editcontent let-modal>
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="page-wrapper bg-dark p-t-100 p-b-50">
+            <div class="wrapper wrapper--w900">
+                <div class="card card-6">
+                    <div class="card-heading">
+                        <h2 class="title">Editar tu blog</h2>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="myForm" (ngSubmit)="editForm(myForm)">
+                            <div class="form-row">
+                                <div class="name">Titulo</div>
+                                <div class="value">
+                                    <input type="text" class="form-control input--style-6" id="inlineFormInput"
+                                        placeholder="tittle" formControlName="tittle">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="name">Reseña</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <textarea class="textarea--style-6 form-control" formControlName="summary"
+                                            id="inlineFormInput" placeholder="Escriba el contenido"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="name">Contenido</div>
+                                <div class="value">
+                                    <div class="input-group">
+                                        <textarea class="textarea--style-6 form-control" name="message"
+                                            formControlName="content" id="inlineFormInput"
+                                            placeholder="Escriba el contenido"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="name">Imagen</div>
+                                <div class="value">
+                                    <input type="text" class="form-control input--style-6" id="inlineFormInput"
+                                        placeholder="usuario" formControlName="url">
+                                    <div class="input-group js-input-file">
+                                        <input class="input-file" type="file" id="file" class="form-control"
+                                            id="inlineFormInput">
+                                        <label class="label--file" for="file">img</label>
+                                        <span class="input-file__info">imagen seleccionada</span>
+                                    </div>
+                                    <div class="label--desc">seleccione una imagen </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="name">usuario</div>
+                                <div class="value">
+                                    <input type="text" class="form-control input--style-6" id="inlineFormInput"
+                                        placeholder="usuario" formControlName="user_id">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="name">Categoria</div>
+                                <div class="value">
+                                    <input type="text" class="form-control input--style-6" id="inlineFormInput"
+                                        placeholder="categoria" formControlName="category_id">
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn--radius-2 btn--blue-2" type="submit"
+                                    [disabled]="!myForm.valid">Guardar</button>
+                                <button type="button" class="btn btn-light"
+                                    (click)="modal.close('Close click')">Cerrar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+
+<div class="card mb-3" style="max-width: 1000px;">
+    <button class="btn btn-success mb-2 mr-2" (click)="openLg(content)">Crear entrada</button>
+
+    <div *ngFor="let blogs of usersList; let i=index">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="../../../assets/img/bg4.jpg" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title"><a>{{blogs.tittle}}</a></h3>
+                    <p class="card-text">{{blogs.summary}}</p>
+                    <p class="card-text">{{blogs.content}}</p>
+                    <div class="meta mb-1"><span class="comment"><a href="#">Comentarios</a></span></div>
+                    <span style="margin-right: 5px"><button (click)="edit(blogs)" class="btn btn-outline-primary"
+                            (click)="openEditLg(Editcontent)">Editar</button> </span>
+                    <span><button (click)="delete(blogs)" class="btn btn-outline-danger">Eliminar</button></span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,12 +11,17 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { ContactanosComponent } from './examples/contactanos/contactanos.component';
 import { NosotrosComponent } from './examples/nosotros/nosotros.component';
 
+import { HttpClientModule } from "@angular/common/http";
+import { WebService } from './web.service';
+
 @NgModule({
     declarations: [
         AppComponent,
         NavbarComponent,
         ContactanosComponent,
-        NosotrosComponent
+        NosotrosComponent,
+       
+
     ],
     imports: [
         BrowserAnimationsModule,
@@ -25,8 +30,9 @@ import { NosotrosComponent } from './examples/nosotros/nosotros.component';
         RouterModule,
         AppRoutingModule,
         ComponentsModule,
+        HttpClientModule,
     ],
-    providers: [],
+    providers: [WebService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
