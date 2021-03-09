@@ -2,7 +2,10 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { Blogs } from 'app/interfaz/blogs.interface';
+<<<<<<< HEAD
 import { Categories } from 'app/interfaz/categories';
+=======
+>>>>>>> 9748634f761244c409cd67986a1c1bc243c5b6ad
 import { WebService } from 'app/web.service';
 
 @Component({
@@ -29,6 +32,7 @@ export class BlogsComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
     this.getData();
+<<<<<<< HEAD
     this.getCategoria();
     
   }
@@ -39,6 +43,14 @@ export class BlogsComponent implements OnInit {
   blogs: Blogs = undefined
   categoriaList: Array<Categories>
   categories: Categories = undefined
+=======
+    
+  }
+  url: string = 'blogs';
+  title = 'Laravel';
+  usersList: Array<Blogs>
+  blogs: Blogs = undefined
+>>>>>>> 9748634f761244c409cd67986a1c1bc243c5b6ad
   myForm: FormGroup;
 
   constructor(private webService: WebService, private formBuilder: FormBuilder,config: NgbModalConfig, private modalService: NgbModal) {
@@ -61,11 +73,14 @@ export class BlogsComponent implements OnInit {
     if (data.valid)
       this.addBlogs(data.value)
   }
+<<<<<<< HEAD
   
   private editForm(data: FormGroup) {
     if (data.valid)
       this.editBlogs(data.value)
   }
+=======
+>>>>>>> 9748634f761244c409cd67986a1c1bc243c5b6ad
 
   getData(): void {
     this.webService.get(this.url).subscribe(res => {
@@ -74,6 +89,7 @@ export class BlogsComponent implements OnInit {
     })
   }
 
+<<<<<<< HEAD
   getCategoria(): void {
     this.webService.getCategoria(this.urlCategoria).subscribe(res => {
       let response = JSON.parse(JSON.stringify(res))
@@ -81,6 +97,8 @@ export class BlogsComponent implements OnInit {
     })
   }
 
+=======
+>>>>>>> 9748634f761244c409cd67986a1c1bc243c5b6ad
   open(content) {
     this.modalService.open(content);
   }
@@ -110,6 +128,7 @@ export class BlogsComponent implements OnInit {
    
   }
 
+<<<<<<< HEAD
   editBlogs(blogs: Blogs): void {
     if(confirm('Esta editado correctamente')){
     if (this.blogs)
@@ -124,14 +143,19 @@ export class BlogsComponent implements OnInit {
   }
   }
 
+=======
+>>>>>>> 9748634f761244c409cd67986a1c1bc243c5b6ad
   openLg(content) {
     this.modalService.open(content, { size: 'lg' });
   }
 
+<<<<<<< HEAD
   openEditLg(Editcontent) {
     this.modalService.open(Editcontent, { size: 'lg' });
   }
 
+=======
+>>>>>>> 9748634f761244c409cd67986a1c1bc243c5b6ad
   delete(blogs: Blogs): void {
     if(confirm('Esta seguro que quiere eliminarlo?')){
     this.webService.delete(this.url, blogs).subscribe(res => {

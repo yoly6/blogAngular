@@ -65,6 +65,7 @@
                             <div class="form-row">
                                 <div class="name">Categoria</div>
                                 <div class="value">
+<<<<<<< HEAD
                                     <div class="input-field col s12">
                                          <select formControlName="category_id">
                                         <option value="" *ngFor="let categories of categoriaList; let i=index"
@@ -157,6 +158,8 @@
                             <div class="form-row">
                                 <div class="name">Categoria</div>
                                 <div class="value">
+=======
+>>>>>>> 9748634f761244c409cd67986a1c1bc243c5b6ad
                                     <input type="text" class="form-control input--style-6" id="inlineFormInput"
                                         placeholder="categoria" formControlName="category_id">
                                 </div>
@@ -176,8 +179,11 @@
     </div>
 </ng-template>
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 9748634f761244c409cd67986a1c1bc243c5b6ad
 <div class="card mb-3" style="max-width: 1000px;">
     <button class="btn btn-success mb-2 mr-2" (click)="openLg(content)">Crear entrada</button>
 
@@ -193,7 +199,11 @@
                     <p class="card-text">{{blogs.content}}</p>
                     <div class="meta mb-1"><span class="comment"><a href="#">Comentarios</a></span></div>
                     <span style="margin-right: 5px"><button (click)="edit(blogs)" class="btn btn-outline-primary"
+<<<<<<< HEAD
                             (click)="openEditLg(Editcontent)">Editar</button> </span>
+=======
+                            (click)="openLg(content)">Editar</button> </span>
+>>>>>>> 9748634f761244c409cd67986a1c1bc243c5b6ad
                     <span><button (click)="delete(blogs)" class="btn btn-outline-danger">Eliminar</button></span>
 
                 </div>
